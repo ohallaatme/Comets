@@ -6,11 +6,18 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class Rock extends BaseActor
 {
+    private String rockFilePath;
+    private float scale;
+
     public Rock(float x, float y, Stage s)
     {
         super(x, y, s);
 
-        this.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/rock.png");
+        this.rockFilePath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/Grey-Asteroid.png";
+        this.scale = 2.5f;
+        this.setScale(this.scale);
+
+        this.loadTexture(this.rockFilePath);
 
         float random = MathUtils.random(30);
 

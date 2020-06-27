@@ -9,14 +9,15 @@ public class Spaceship extends BaseActor
 {
     private Thrusters thrusters;
     private Shield shield;
+    private String spaceShipPath;
     public int shieldPower;
 
     public Spaceship(float x, float y, Stage s)
     {
         super(x, y, s);
 
-        //TODO - UPDATE with self created asset
-        this.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/spaceship.png");
+        this.spaceShipPath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/SpaceShip.png";
+        this.loadTexture(this.spaceShipPath);
         this.setBoundaryPolygon(8);
 
         this.setAcceleration(200);
@@ -32,8 +33,8 @@ public class Spaceship extends BaseActor
         this.addActor(this.thrusters);
 
         // Adjust the thrusters position relative to the spaceship so that the thrusters appear in the correct location
-        this.thrusters.setPosition(-this.thrusters.getWidth(),
-                this.getHeight()/2 - this.thrusters.getHeight()/2);
+        this.thrusters.setPosition(this.getWidth()/2 - this.thrusters.getWidth()/2,
+                this.getHeight() - this.thrusters.getHeight() - 8);
 
 
         this.shield = new Shield(0, 0, s);
@@ -58,9 +59,10 @@ public class Spaceship extends BaseActor
         Laser laser = new Laser(0, 0, this.getStage());
 
         // center the laser at the Spaceship, this object, align rotation and motion angle
+        // 6.27.2020 updated for vertical ship
         laser.centerAtActor(this);
-        laser.setRotation(this.getRotation());
-        laser.setMotionAngle(this.getRotation());
+        laser.setRotation(this.getRotation() + 90);
+        laser.setMotionAngle(this.getRotation() + 90);
 
     }
 
@@ -106,9 +108,11 @@ public class Spaceship extends BaseActor
         }
 
         // thrusters (jets) visible if the player is accelerating forward, or else not visible
+
+        // 6.27.2020 updated to accelerate at angle plus 90 to reflect vertical ship vs right facing with own graphics
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
         {
-            this.accelerateAtAngle(this.getRotation());
+            this.accelerateAtAngle(this.getRotation() + 90);
             this.thrusters.setVisible(true);
         }
 
@@ -123,10 +127,22 @@ public class Spaceship extends BaseActor
         this.wrapAroundWorld();
 
         //shield appears weaker as health decreases
-        this.shield.setOpacity(this.shieldPower/100f);
-
+        if (this.shieldPower >= 75)
+        {
+            this.shield.setOpacity(0.75f);
+        }
+        else if (this.shieldPower >= 50)
+        {
+            this.shield.setOpacity(0.50f);
+        } else if (this.shieldPower >= 25)
+        {
+            this.shield.setOpacity(0.25f);
+        } else
+        {
+            // shield out of health
+            this.shield.setOpacity(0.0f);
+        }
     }
-
 }
 
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class LevelScreen extends BaseScreen
 {
+    private String spacePath;
     private Spaceship spaceship;
     private boolean gameOver;
 
@@ -13,7 +14,10 @@ public class LevelScreen extends BaseScreen
     {
         // Actor for background
         BaseActor space = new BaseActor(0, 0, this.mainStage);
-        space.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/space.png");
+
+        // Background texture
+        this.spacePath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/OuterSpace.png";
+        space.loadTexture(this.spacePath);
         space.setSize(800, 600);
 
         //TODO confused why this is just BaseActor
@@ -64,7 +68,7 @@ public class LevelScreen extends BaseScreen
                 else
                 {
                     // decrease shieldPower property from spaceship due to collision with rock
-                    this.spaceship.shieldPower -= 34;
+                    this.spaceship.shieldPower -= 25;
                     Explosion boom = new Explosion(0, 0, this.mainStage);
 
                     // blow up the rock
