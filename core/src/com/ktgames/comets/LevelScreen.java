@@ -1,6 +1,7 @@
 package com.ktgames.comets;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class LevelScreen extends BaseScreen
@@ -18,22 +19,34 @@ public class LevelScreen extends BaseScreen
         // Background texture
         this.spacePath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/OuterSpace.png";
         space.loadTexture(this.spacePath);
-        space.setSize(800, 600);
+        space.setSize(900, 900);
 
         //TODO confused why this is just BaseActor
         BaseActor.setWorldBounds(space);
 
         this.spaceship = new Spaceship(400, 300, this.mainStage);
 
+        // --- CREATE ASTEROIDS ---
         // automatically added to mainStage through BaseActor constructor
-        new Rock(600, 500, this.mainStage);
-        new Rock(600, 300, this.mainStage);
-        new Rock(600, 100, this.mainStage);
-        new Rock(400, 100, this.mainStage);
-        new Rock(200, 100, this.mainStage);
-        new Rock(200, 300, this.mainStage);
-        new Rock(200, 500, this.mainStage);
-        new Rock(400, 500, this.mainStage);
+        new Asteroid(600, 500, this.mainStage);
+        new Asteroid(600, 300, this.mainStage);
+        new Asteroid(600, 100, this.mainStage);
+        new Asteroid(400, 100, this.mainStage);
+        new Asteroid(200, 100, this.mainStage);
+        new Asteroid(200, 300, this.mainStage);
+        new Asteroid(200, 500, this.mainStage);
+        new Asteroid(400, 500, this.mainStage);
+
+        // -- CREATE COMETS ---
+        for (int i=0; i<=10; i++)
+        {
+            int x = MathUtils.random(900);
+            int y = MathUtils.random(900);
+
+            new Comet(x, y, this.mainStage);
+
+        }
+
 
         this.gameOver = false;
     }
@@ -42,7 +55,7 @@ public class LevelScreen extends BaseScreen
     @Override
     public void update(float dt)
     {
-        for (BaseActor rockActor : BaseActor.getList(this.mainStage, "com.ktgames.comets.Rock"))
+        for (BaseActor rockActor : BaseActor.getList(this.mainStage, "com.ktgames.comets.Asteroid"))
         {
             if (rockActor.overlaps(this.spaceship))
             {
@@ -91,7 +104,7 @@ public class LevelScreen extends BaseScreen
         }
 
         // If all of the rocks are gone and you did not die in the game, show you won message
-        if (!this.gameOver && BaseActor.count(this.mainStage, "com.ktgames.comets.Rock") == 0)
+        if (!this.gameOver && BaseActor.count(this.mainStage, "com.ktgames.comets.Asteroid") == 0)
         {
             BaseActor messageWin = new BaseActor(0, 0, this.uiStage);
             messageWin.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/message-win.png");

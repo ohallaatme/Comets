@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.logging.Level;
 
-public class Comets extends BaseGame
+public class CometsGame extends BaseGame
 {
 	public void create()
 	{
