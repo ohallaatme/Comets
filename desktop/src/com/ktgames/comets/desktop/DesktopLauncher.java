@@ -9,6 +9,6 @@ public class DesktopLauncher {
 	public static void main (String[] arg)
 	{
 		Game comets = new CometsGame();
-		LwjglApplication launcher = new LwjglApplication(comets, "Comets", 900, 900);
+		LwjglApplication launcher = new LwjglApplication(comets, "Comets", 1200, 1200);
 	}
 }

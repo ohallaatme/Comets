@@ -755,7 +755,7 @@ public class BaseActor extends Group
 
         return list;
     }
-    // TODO 6.27.2020 - Update Comets so collision works, use updated method below, update graphics for background and special effects. Test Method below as a part of this!
+    // TODO 6.27: Update graphics for background and special effects. Test Method below as a part of this!
     // 6.27.2020 - Update so list can be derived from multiple classes, overload getList
     public static ArrayList<BaseActor> getList(Stage stage, String className1, String className2)
     {
@@ -807,6 +807,12 @@ public class BaseActor extends Group
         // leveraging this class. Note no 'this' reference as getList is a static
         // method
         return getList(stage, className).size();
+    }
+
+    // 6.27.2020 Override to take multiple enemies
+    public static int count(Stage stage, String className1, String className2)
+    {
+        return getList(stage, className1, className2).size();
     }
 
     //-------------------------------

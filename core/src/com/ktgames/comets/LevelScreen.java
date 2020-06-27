@@ -17,9 +17,10 @@ public class LevelScreen extends BaseScreen
         BaseActor space = new BaseActor(0, 0, this.mainStage);
 
         // Background texture
+        // TODO - need less stars
         this.spacePath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/OuterSpace.png";
         space.loadTexture(this.spacePath);
-        space.setSize(900, 900);
+        space.setSize(1200, 1200);
 
         //TODO confused why this is just BaseActor
         BaseActor.setWorldBounds(space);
@@ -55,7 +56,7 @@ public class LevelScreen extends BaseScreen
     @Override
     public void update(float dt)
     {
-        for (BaseActor rockActor : BaseActor.getList(this.mainStage, "com.ktgames.comets.Asteroid"))
+        for (BaseActor rockActor : BaseActor.getList(this.mainStage, "com.ktgames.comets.Asteroid", "com.ktgames.comets.Comet"))
         {
             if (rockActor.overlaps(this.spaceship))
             {
@@ -104,7 +105,7 @@ public class LevelScreen extends BaseScreen
         }
 
         // If all of the rocks are gone and you did not die in the game, show you won message
-        if (!this.gameOver && BaseActor.count(this.mainStage, "com.ktgames.comets.Asteroid") == 0)
+        if (!this.gameOver && BaseActor.count(this.mainStage, "com.ktgames.comets.Asteroid", "com.ktgames.comets.Comet") == 0)
         {
             BaseActor messageWin = new BaseActor(0, 0, this.uiStage);
             messageWin.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/message-win.png");
