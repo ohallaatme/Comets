@@ -20,7 +20,7 @@ public class LevelScreen extends BaseScreen
         // TODO - need less stars
         this.spacePath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/OuterSpace.png";
         space.loadTexture(this.spacePath);
-        space.setSize(1200, 1200);
+        space.setSize(800, 600);
 
         //TODO confused why this is just BaseActor
         BaseActor.setWorldBounds(space);
