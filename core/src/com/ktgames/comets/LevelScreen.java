@@ -93,7 +93,8 @@ public class LevelScreen extends BaseScreen
                     // Create a you lose message
                     //TODO - Eventually replace with score
                     BaseActor messageLose = new BaseActor(0, 0, this.uiStage);
-                    messageLose.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/message-lose.png");
+                    messageLose.loadTexture("core/assets/Game-Assets/GAMEOVER.png");
+                    messageLose.setScale(8.0f);
                     messageLose.centerAtPosition(400, 300);
                     messageLose.setOpacity(0);
                     messageLose.addAction(Actions.fadeIn(1));
