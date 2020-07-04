@@ -1,14 +1,22 @@
 package com.ktgames.comets;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import static java.lang.Class.forName;
 
 public class LevelScreen extends BaseScreen
 {
     private String spacePath;
     private Spaceship spaceship;
     private boolean gameOver;
+
+    // scoring
+    private int score;
+    private String scoreName;
+    BitmapFont bitmapFontName;
+
 
     @Override
     public void initialize()
@@ -28,27 +36,28 @@ public class LevelScreen extends BaseScreen
         this.spaceship = new Spaceship(400, 300, this.mainStage);
 
         // --- CREATE ASTEROIDS ---
-        // automatically added to mainStage through BaseActor constructor
-        new Asteroid(600, 500, this.mainStage);
-        new Asteroid(600, 300, this.mainStage);
-        new Asteroid(600, 100, this.mainStage);
-        new Asteroid(400, 100, this.mainStage);
-        new Asteroid(200, 100, this.mainStage);
-        new Asteroid(200, 300, this.mainStage);
-        new Asteroid(200, 500, this.mainStage);
-        new Asteroid(400, 500, this.mainStage);
+        for (int i=0; i<=20; i++)
+        {
+            int x = MathUtils.random(800);
+            int y = MathUtils.random(600);
+
+            new Asteroid(x, y, this.mainStage);
+        }
 
         // -- CREATE COMETS ---
         for (int i=0; i<=10; i++)
         {
-            int x = MathUtils.random(900);
-            int y = MathUtils.random(900);
+            int x = MathUtils.random(800);
+            int y = MathUtils.random(600);
 
             new Comet(x, y, this.mainStage);
 
         }
 
-
+        // initialize score
+        this.score = 0;
+        this.scoreName = "Score: 0";
+        this.bitmapFontName = new BitmapFont();
         this.gameOver = false;
     }
 
@@ -98,6 +107,31 @@ public class LevelScreen extends BaseScreen
                 {
                     Explosion boom = new Explosion(0, 0, this.mainStage);
                     boom.centerAtActor(rockActor);
+
+                    // distinguish between comet and asteroid for scoring purposes
+                    Class asteroidClass = null;
+                    Class cometClass = null;
+
+                    try
+                    {
+                        asteroidClass = forName("com.ktgames.comets.Asteroid");
+                        cometClass = forName("com.ktgames.comets.Comet");
+                    }
+                    catch (Exception error)
+                    {
+                        error.printStackTrace();
+                    }
+
+                    if (asteroidClass.isInstance(rockActor))
+                    {
+                        this.score += 10;
+                    }
+                    if (cometClass.isInstance(rockActor))
+                    {
+                        this.score += 20;
+                    }
+                    this.scoreName = "score: " + this.score;
+                    System.out.println(this.score);
                     laserActor.remove();
                     rockActor.remove();
                 }
