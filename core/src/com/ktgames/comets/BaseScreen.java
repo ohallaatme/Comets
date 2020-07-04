@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -67,8 +68,8 @@ public abstract class BaseScreen implements Screen, InputProcessor
 
         //TODO - pickup on testing drawing the score!
         batch.begin();
-        this.bitmapFontName.setColor(0.0f, 0.0f, 0.0f, 0.8f);
-        this.bitmapFontName.draw(batch, this.scoreName, 25, 100);
+        this.bitmapFontName.setColor(Color.WHITE);
+        this.bitmapFontName.draw(batch, this.scoreName, 650, 50);
         batch.end();
     }
 

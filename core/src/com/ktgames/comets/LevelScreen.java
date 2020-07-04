@@ -1,7 +1,9 @@
 package com.ktgames.comets;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import static java.lang.Class.forName;
@@ -16,6 +18,7 @@ public class LevelScreen extends BaseScreen
     private int score;
     private String scoreName;
     BitmapFont bitmapFontName;
+    private SpriteBatch batch;
 
 
     @Override
@@ -132,6 +135,7 @@ public class LevelScreen extends BaseScreen
                     }
                     this.scoreName = "score: " + this.score;
                     System.out.println(this.score);
+
                     laserActor.remove();
                     rockActor.remove();
                 }
