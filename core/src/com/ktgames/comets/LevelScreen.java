@@ -1,11 +1,14 @@
 package com.ktgames.comets;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
 import static java.lang.Class.forName;
 
 public class LevelScreen extends BaseScreen
@@ -16,9 +19,8 @@ public class LevelScreen extends BaseScreen
 
     // scoring
     private int score;
-    private String scoreName;
-    BitmapFont bitmapFontName;
-    private SpriteBatch batch;
+    private Label scoringLabel;
+
 
 
     @Override
@@ -59,9 +61,15 @@ public class LevelScreen extends BaseScreen
 
         // initialize score
         this.score = 0;
-        this.scoreName = "Score: 0";
-        this.bitmapFontName = new BitmapFont();
+
+        // initialize scoring label
+        this.scoringLabel = new Label("Score: 0", BaseGame.labelStyle);
+        this.scoringLabel.setColor(Color.WHITE);
+        this.scoringLabel.setPosition(20, 40);
+        this.uiStage.addActor(this.scoringLabel);
+
         this.gameOver = false;
+
     }
 
 
@@ -133,9 +141,8 @@ public class LevelScreen extends BaseScreen
                     {
                         this.score += 20;
                     }
-                    this.scoreName = "score: " + this.score;
-                    System.out.println(this.score);
 
+                    this.scoringLabel.setText(String.format("Score: %s", this.score));
                     laserActor.remove();
                     rockActor.remove();
                 }

@@ -3,6 +3,9 @@ package com.ktgames.comets;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public abstract class BaseGame extends Game
 {
@@ -11,6 +14,12 @@ public abstract class BaseGame extends Game
      */
 
     private static BaseGame game;
+
+    /**
+     * Store label style to ensure text style is consistent throughout game
+     */
+
+    public static Label.LabelStyle labelStyle;
 
     /**
      * Called when game is initialized; stores global reference to game object
@@ -36,6 +45,9 @@ public abstract class BaseGame extends Game
         // prepare for multiple classes/stages.actors to receive discrete (vs continuous) input
         InputMultiplexer im = new InputMultiplexer();
         Gdx.input.setInputProcessor(im);
+
+        // initialize text style for the game
+        labelStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
     }
 
     public static void setActiveScreen(BaseScreen s)

@@ -17,22 +17,13 @@ public abstract class BaseScreen implements Screen, InputProcessor
     protected Stage mainStage;
     protected Stage uiStage;
 
-    // scoring
-    private int score;
-    private String scoreName;
-    BitmapFont bitmapFontName;
-    private SpriteBatch batch;
+
+
 
     public BaseScreen()
     {
         this.mainStage = new Stage();
         this.uiStage = new Stage();
-
-        this.batch = new SpriteBatch();
-
-        this.score = 0;
-        this.scoreName = "score: 0";
-        this.bitmapFontName = new BitmapFont();
 
         initialize();
     }
@@ -65,12 +56,9 @@ public abstract class BaseScreen implements Screen, InputProcessor
         // draw the graphics
         this.mainStage.draw();
         this.uiStage.draw();
+        // TODO - UPDATE SCORING POST CH 5
 
-        //TODO - pickup on testing drawing the score!
-        batch.begin();
-        this.bitmapFontName.setColor(Color.WHITE);
-        this.bitmapFontName.draw(batch, this.scoreName, 650, 50);
-        batch.end();
+
     }
 
     // methods required by Screen interface
