@@ -16,6 +16,6 @@ public class CometsGame extends BaseGame
 	{
 		super.create();
 		this.batch = new SpriteBatch();
-		setActiveScreen(new LevelScreen());
+		setActiveScreen(new MenuScreen());
 	}
 }
