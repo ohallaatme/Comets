@@ -21,6 +21,11 @@ public class LevelScreen extends BaseScreen
     private int score;
     private Label scoringLabel;
 
+    // level system - game never ends, but counter below creates increasingly more objects based on how long you have been
+    // in the game
+    private int asteroidCounter;
+    private int cometCounter;
+
 
 
     @Override
@@ -30,7 +35,6 @@ public class LevelScreen extends BaseScreen
         BaseActor space = new BaseActor(0, 0, this.mainStage);
 
         // Background texture
-        // TODO - need less stars
         this.spacePath = "/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Game-Assets/OuterSpace.png";
         space.loadTexture(this.spacePath);
         space.setSize(800, 600);
@@ -40,8 +44,12 @@ public class LevelScreen extends BaseScreen
 
         this.spaceship = new Spaceship(400, 300, this.mainStage);
 
+        // using counters so once initial initialied batch of rocks destroyed, even more generated
+        this.asteroidCounter = 20;
+        this.cometCounter = 10;
+
         // --- CREATE ASTEROIDS ---
-        for (int i=0; i<=20; i++)
+        for (int i=0; i<=this.asteroidCounter; i++)
         {
             int x = MathUtils.random(800);
             int y = MathUtils.random(600);
@@ -50,13 +58,12 @@ public class LevelScreen extends BaseScreen
         }
 
         // -- CREATE COMETS ---
-        for (int i=0; i<=10; i++)
+        for (int i=0; i<=this.cometCounter; i++)
         {
             int x = MathUtils.random(800);
             int y = MathUtils.random(600);
 
             new Comet(x, y, this.mainStage);
-
         }
 
         // initialize score
@@ -87,12 +94,13 @@ public class LevelScreen extends BaseScreen
                     boom.centerAtActor(this.spaceship);
                     this.spaceship.remove();
 
-                    //TODO - better understand the positioning of the ship after removal
+                    // put spaceship way off screen if you lose
                     this.spaceship.setPosition(-1000, -1000);
 
                     // Create a you lose message
                     BaseActor messageLose = new BaseActor(0, 0, this.uiStage);
-                    messageLose.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/message-lose.png");
+                    messageLose.loadTexture("core/assets/Game-Assets/GAMEOVER.png");
+                    messageLose.setScale(8.0f);
                     messageLose.centerAtPosition(400, 300);
                     messageLose.setOpacity(0);
                     messageLose.addAction(Actions.fadeIn(1));
@@ -151,12 +159,27 @@ public class LevelScreen extends BaseScreen
         // If all of the rocks are gone and you did not die in the game, show you won message
         if (!this.gameOver && BaseActor.count(this.mainStage, "com.ktgames.comets.Asteroid", "com.ktgames.comets.Comet") == 0)
         {
-            BaseActor messageWin = new BaseActor(0, 0, this.uiStage);
-            messageWin.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/message-win.png");
-            messageWin.centerAtPosition(400, 300);
-            messageWin.setOpacity(0);
-            messageWin.addAction(Actions.fadeIn(1));
-            this.gameOver = true;
+            // increase the difficulty by adding more rocks
+            this.asteroidCounter += 5;
+            this.cometCounter +=5;
+
+            for (int i=0; i<=this.asteroidCounter; i++)
+            {
+                // trying to have the new rocks start at the top so it doesn't bomb the ship unfairly
+                int x = 800;
+                int y = 800;
+
+                new Asteroid(x, y, this.mainStage);
+            }
+
+            // -- CREATE COMETS ---
+            for (int i=0; i<=this.cometCounter; i++)
+            {
+                int x = 0;
+                int y = 0;
+
+                new Comet(x, y, this.mainStage);
+            }
         }
     }
 
