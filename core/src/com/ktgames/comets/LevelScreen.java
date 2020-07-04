@@ -91,7 +91,6 @@ public class LevelScreen extends BaseScreen
                     this.spaceship.setPosition(-1000, -1000);
 
                     // Create a you lose message
-                    //TODO - Eventually replace with score
                     BaseActor messageLose = new BaseActor(0, 0, this.uiStage);
                     messageLose.loadTexture("/Users/katherineohalloran/Documents/GameDev/Comets/core/assets/Demo-Assets/message-lose.png");
                     messageLose.centerAtPosition(400, 300);
