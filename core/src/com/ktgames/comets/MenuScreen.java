@@ -16,16 +16,16 @@ public class MenuScreen extends BaseScreen
         space.setSize(800, 600);
 
         BaseActor title = new BaseActor(0, 0, this.mainStage);
-        title.loadTexture("core/assets/Game-Assets/Title-Page.png");
-        float scale = 8.0f;
+        title.loadTexture("core/assets/Game-Assets/Title-Page-V2.png");
+        float scale = 6.0f;
         title.setScale(scale);
 
-        title.centerAtPosition(400, 300);
+        title.centerAtPosition(400, 250);
         title.moveBy(0, 100);
 
         Label startLabel = new Label("Hit 'S' on your keyboard to start!", BaseGame.labelStyle);
         startLabel.setColor(Color.WHITE);
-        startLabel.setPosition(300, 300);
+        startLabel.setPosition(300, 200);
         startLabel.moveBy(0, -100);
         this.uiStage.addActor(startLabel);
 
