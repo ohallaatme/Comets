@@ -1,6 +1,7 @@
 package com.ktgames.comets;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,7 +40,6 @@ public class LevelScreen extends BaseScreen
         space.loadTexture(this.spacePath);
         space.setSize(800, 600);
 
-        //TODO confused why this is just BaseActor
         BaseActor.setWorldBounds(space);
 
         this.spaceship = new Spaceship(400, 300, this.mainStage);
@@ -105,6 +105,8 @@ public class LevelScreen extends BaseScreen
                     messageLose.setOpacity(0);
                     messageLose.addAction(Actions.fadeIn(1));
                     this.gameOver = true;
+
+
                 }
                 else
                 {
